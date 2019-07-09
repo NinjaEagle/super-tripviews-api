@@ -6,7 +6,7 @@ class CreateReviews < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :description
       t.string :destination_name
-
+      
       t.timestamps
     end
   end
