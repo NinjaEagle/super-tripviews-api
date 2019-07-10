@@ -25,21 +25,21 @@
         <h3>Add a new destination:</h3>
         <div>
           <div class="uk-margin-small">
-            <input id = "destination-name" type="string" class="uk-input" placeholder="Destination Name">
+            <input id = "destination-name" type="string" name= "name" class="uk-input" placeholder="Destination Name">
           </div>
           <div class="uk-margin-small">
-            <input id = "review-input" type="string" class="uk-input" min="0" max="100" placeholder="Climate">
+            <input id = "review-input" type="string" name= "climate" class="uk-input" placeholder="Climate">
           </div>
           <div class="uk-margin-small">
-            <textarea type="text" class="uk-textarea" placeholder="Attractions" style="resize:none"></textarea>
+            <textarea type="text" name= "attractions" class="uk-textarea" placeholder="Attractions" style="resize:none"></textarea>
           </div>
           <div class="uk-margin-small">
-            <textarea type="string" class="uk-textarea" placeholder="Description" style="resize:none"></textarea>
-          </div>
-          <div class="uk-margin-small">
+            <textarea type="string" name = "description" class="uk-textarea" placeholder="Description" style="resize:none"></textarea>
+          <!-- </div> -->
+          <!-- <div class="uk-margin-small">
             <input id = "destination-location" type="float" class="uk-input" placeholder="Longitude">
-          </div>
-          <button class="uk-button uk-button-default">Add this review</button>
+          </div> -->
+          <button id="submit-btn" type="submit" class="submit">Add this select destination!</button>
         </div>
       </form>
     </div>

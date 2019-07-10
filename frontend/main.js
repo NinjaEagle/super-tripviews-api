@@ -3,11 +3,12 @@ document.addEventListener('DOMContentLoaded',fetchDestinations
 // declare variables
 let listofDestinations = document.querySelector('#list');
 const destinationPanel = document.querySelector('#show-panel');
-const newdestinationList = document.querySelector('#review-list')
+const form = document.querySelector('#new-destination-form');
 
 
 // add Event Listeners
 listofDestinations.addEventListener('click', destinationInfo);
+form.addEventListener('submit', formInfo);
 
 // make fetch request
 function fetchDestinations(){
@@ -38,12 +39,12 @@ function fetchDestinationPatch(){
   .then(res => res.json())
   .then(showDestinationInfo)
 }
-
-function fetchReviews(){
-  fetch('http://localhost:3000/reviews')
-  .then(res => res.json())
-  .then(showReviews)
-}
+//
+// function fetchReviews(){
+//   fetch('http://localhost:3000/reviews')
+//   .then(res => res.json())
+//   .then(showReviews)
+// }
 
 // DOM Manipulation
 function destinationInfo(e){
@@ -71,7 +72,6 @@ function showDestinationInfo(destination){
   touristReviewList += '<ul>'
 
     const destinationPanel = document.querySelector("#show-panel")
-  // let commentContent = '<ul>'
     destinationPanel.innerHTML = `
   <h2> ${destination.name} </h2>
   <img src=${destination.image} class="destination-image">
@@ -82,12 +82,48 @@ function showDestinationInfo(destination){
   `
 }
 
+function formInfo(e){
+  e.preventDefault();
+  fetch("http://localhost:3000/destinations",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      "name": form.name.value,
+      "climate": form.climate.value,
+      "attractions": form.attractions.value,
+      "description": form.description.value
+    })
+  })
+  .then(res => res.json())
+  .then(addNewDestination)
+}
+
+// create a new Destination
+function addNewDestination(newDestination){
+  const destinationPanel = document.querySelector("#show-panel")
+
+  listofDestinations.innerHTML += `
+  <li class='destination-btn' id=${newDestination.id}>${newDestination.name} </li>
+  `
+
+  destinationPanel.innerHTML = `
+  <h2> ${newDestination.name} </h2>
+  <img src=${newDestination.image} class="newDestination-image">
+  <h3>Climate:</h3> ${newDestination.climate}
+  <h3>Attractions:</h3> ${newDestination.attractions}
+  <h3>Description:</h3> <p>${newDestination.description}</p>
+  <h3>Past Reviews:</h3>
+  `
+}
+
 // function showReviews(reviews){
 //     const destinationPanel = document.querySelector("#show-panel")
 //   // let commentContent = '<ul>'
 //   reviews.forEach(function(review){
 //     // debugger
-//     if(review.destination_name == destination.name){
+//     if(review.destination_name == newDestination.name){
 //         div.id = "review-id"
 //         div.innerHTML = `
 //       <h2> ${review.name} </h2>
@@ -99,14 +135,4 @@ function showDestinationInfo(destination){
 //     }
 //   destinationList.append(div)
 //   })
-// }
-
-
-// function addNewReview(newReview){
-//   const div = document.createElement("div");
-//   div.className = "card"
-//   div.innerHTML = `<h2>${newReview.name}</h2>
-//   <p>${newReview.likes} </p>
-//   <button class="like-btn">Like</button>`
-//   reviewDiv.append(div)
 // }
