@@ -5,12 +5,12 @@ class DestinationsController < ApplicationController
   def index
     @destinations = Destination.all
 
-    render json: @destinations
+    render json: @destinations, include: [:reviews]
   end
 
   # GET /destinations/1
   def show
-    render json: @destination
+    render json: @destination, include: [:reviews]
   end
 
   # POST /destinations
