@@ -1,0 +1,1 @@
+A trip viewer website that allows you to select destinations on the sindbar and it then displays the info for the destination, popular attractions, and tourist reviews. You can then add a new destination you've been to as well as making a review using the form above.
